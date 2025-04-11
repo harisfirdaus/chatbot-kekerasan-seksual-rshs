@@ -17,9 +17,7 @@ PAP melakukan aksinya di salah satu ruangan di lantai 7 salah satu gedung di RSH
 
 Modus pelaku adalah meminta korban untuk pemeriksaan crossmatch atau kecocokan jenis golongan darah yang akan ditransfusikan kepada penerima. Saat itu, kerabat korban yang sedang dirawat di RSHS membutuhkan donor darah.
 
-Dalam pelaksanaan pemeriksaan darah, korban dibius hingga tak sadarkan diri. Beberapa jam kemudian ketika korban sadar, dia tak hanya merasa sakit di tangan bekas infus tetapi juga di kemaluannya.
-
-Korban pun melakukan visum dan ditemukan bekas cairan sperma di kemaluannya. Pihak keluarga korban segera melaporkan kejadian ini ke Kepolisian Daerah (Polda) Jawa Barat.`;
+Dalam pelaksanaan pemeriksaan darah, korban dibius hingga tak sadarkan diri. Pihak keluarga korban segera melaporkan kejadian ini ke Kepolisian Daerah (Polda) Jawa Barat.`;
 
 const article2 = `Unpad Pecat Mahasiswa PPDS Anestesi yang Perkosa Keluarga Pasien RS Hasan Sadikin
 
@@ -91,9 +89,9 @@ Penyelidikan ini juga dilaksanakan majelis disiplin profesi. "Jika terbukti pela
 
 const article9 = `Kasus Pemerkosaan di RSHS, Polisi Lakukan Tes DNA demi Ungkap Pelaku Baru
 
-BANDUNG, KOMPAS — Polda Jawa Barat melakukan tes DNA untuk mengungkap kemungkinan adanya pelaku lain dalam kasus pemerkosaan di Rumah Sakit Hasan Sadikin (RSHS) Bandung. Hal ini dilakukan setelah ditemukan bukti baru dari hasil visum korban.
+BANDUNG, KOMPAS — Polda Jawa Barat melakukan tes DNA untuk mengungkap kemungkinan adanya pelaku lain dalam kasus pemerkosaan di Rumah Sakit Hasan Sadikin (RSHS) Bandung.
 
-"Kami menemukan beberapa sampel DNA yang berbeda dari hasil visum korban. Ini menunjukkan kemungkinan ada pelaku lain yang terlibat," ujar Direktur Reserse Kriminal Umum Polda Jabar Komisaris Besar Surawan.
+"Kami menemukan beberapa sampel DNA yang berbeda. Ini menunjukkan kemungkinan ada pelaku lain yang terlibat," ujar Direktur Reserse Kriminal Umum Polda Jabar Komisaris Besar Surawan.
 
 Surawan menambahkan, pihaknya telah mengambil sampel DNA dari beberapa orang yang diduga terkait dengan kasus ini. "Kami sedang menunggu hasil laboratorium forensik untuk memastikan identitas pelaku lain," katanya.`;
 
@@ -199,6 +197,32 @@ Ia berpendapat, kasus ini menimbulkan keresahan warga dan pasien secara meluas d
 
 "Karena sudah mengancam hajat hidup orang banyak dan ketertiban umum, penyikapan atas kasus ini masuk kategori Informasi Serta-Merta pada Pasal 10 ayat 1 Undang-Undang. Kemenkes wajib menyampaikan informasi penyikapan terhadap kasus ini." kata Arya.`;
 
+const article18 = `Pemerkosaan di RSHS Bandung: Tim Gabungan Puslabfor Polri dan Polda Jabar Lakukan Olah TKP
+
+Tim gabungan Mabes Polri dan Polda Jabar melaksanakan olah TKP terkait pemerkosaan tiga perempuan di RSHS Bandung.
+
+BANDUNG, KOMPAS- Tim gabungan Mabes Polri dan Polda Jawa Barat melakukan olah tempat kejadian perkara di Gedung Pusat Pelayanan Ibu dan Anak Rumah Sakit Hasan Sadikin Bandung, Jawa Barat, Jumat (10/4/2025). Kegiatan ini terkait pemerkosaan yang dilakukan mahasiswa Program Pendidikan Dokter Spesialis jurusan Anestesi bernama Priguna Anugrah Pratama.
+
+Dari pantauan Kompas, tim tiba di Gedung Pusat Pelayanan Ibu dan Anak Rumah Sakit Hasan Sadikin (RSHS) Bandung pukul 15.45 WIB. Hadir saat itu, Kepala Biro Laboratorium Kedokteran dan Kesehatan di Pusat Kedokteran dan Kesehatan Polri Brigadir Jenderal Pol Sumy Hastry Purwanty.
+
+Dari Polda Jabar, diwakili Direktur Reserse Kriminal Umum Komisaris Besar Surawan dan Kepala Bidang Kedokteran dan Kesehatan Kombes Besar dr Nariyana.
+
+Terkait hasil pemeriksaan, polisi belum mau memberikan keterangan. Sebab proses olah TKP masih berlangsung hingga berita ini diturunkan.
+
+"Mau lihat TKP (tempat kejadian perkara) dulu ya," kata Surawan.
+
+Sebelumnya, Priguna diduga memerkosa tiga korbannya pada tanggal yang berbeda-beda di bulan Maret tahun 2025. Ia melakukan aksinya pada 10, 16 dan 18 Maret 2025.
+
+Modus yang digunakan Priguna untuk menjerat ketiga korbannya kurang lebih serupa. Dia meminta korban melakukan pemeriksaan darah, analisa untuk anestesi, dan uji alergi terhadap obat bius.
+
+"Diduga pelaku melakukan aksinya setelah membius korban hingga tidak sadarkan diri," ungkap Surawan.
+
+Sementara itu, Ferdy Rizky Adilya, selaku kuasa hukum Priguna mengatakan, kliennya mengaku bersalah dan meminta maaf kepada korban serta keluarganya. Priguna siap mengikuti proses hukum di Polda Jabar.
+
+Ferdy juga meminta seluruh pihak masyarakat maupun media massa agar tidak mempublikasikan foto istri dan keluarga Priguna di berita maupun media sosial. Sebab, pihak keluarga sama sekali tidak terlibat peristiwa tersebut.
+
+"Kami meminta semua pihak menghargai asas praduga tak bersalah. Klien kami akan mengikuti proses hukum dalam kasus ini," kata Ferdy.`;
+
 // Example questions array
 const exampleQuestions = [
   "Bagaimana kronologi kasus kekerasan seksual di RSHS?",
@@ -249,7 +273,8 @@ function App() {
       article14,
       article15,
       article16,
-      article17
+      article17,
+      article18
     ];
 
     // Add each article to context and update state when done

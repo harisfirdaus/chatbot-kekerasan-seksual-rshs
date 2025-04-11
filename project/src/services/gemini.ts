@@ -79,6 +79,10 @@ const articleReferences: ArticleReferenceMap = {
   "six-shocking-facts": {
     title: "Pemerkosaan di Rumah Sakit Hasan Sadikin Bandung, Enam Fakta Mengejutkan Terkuak",
     url: "https://www.kompas.id/artikel/pemerkosaan-di-rumah-sakit-hasan-sadikin-bandung-enam-mengejutkan-terkuak"
+  },
+  "crime-scene-investigation": {
+    title: "Pemerkosaan di RSHS Bandung: Tim Gabungan Puslabfor Polri dan Polda Jabar Lakukan Olah TKP",
+    url: "https://www.kompas.id/artikel/pemerkosaan-di-rshs-bandung-tim-gabungan-puslabfor-polri-dan-polda-jabar-lakukan-olah-tkp"
   }
 };
 
@@ -108,19 +112,18 @@ Anda adalah asisten AI yang HANYA boleh menggunakan basis pengetahuan berikut un
 ${combinedContext}
 
 INSTRUKSI PENTING:
-- HANYA gunakan informasi dari basis pengetahuan di atas
+- HANYA gunakan informasi yang secara eksplisit disebutkan dalam basis pengetahuan di atas
 - Jika basis pengetahuan tidak memiliki informasi yang relevan, katakan "Maaf, saya tidak memiliki informasi tentang hal tersebut dalam basis pengetahuan saya."
 - JANGAN gunakan pengetahuan atau data pelatihan lain
 - JANGAN membuat asumsi atau memberikan informasi yang tidak ada dalam basis pengetahuan
-- Berikan jawaban yang LENGKAP dan MENDETAIL
-- Elaborasi setiap poin dengan penjelasan mendalam
-- Sertakan SEMUA data relevan dari basis pengetahuan
-- Hubungkan berbagai aspek untuk memberikan gambaran komprehensif
-- Jelaskan implikasi dan dampak secara detail
-- Analisis setiap aspek secara mendalam
+- Berikan jawaban yang KOMPREHENSIF dan DETAIL dengan tetap berpegang pada informasi dalam basis pengetahuan
+- Susun jawaban dengan struktur yang jelas dan logis
+- Jelaskan informasi secara mendalam selama informasi tersebut ada dalam basis pengetahuan
+- JANGAN menambahkan analisis, tantangan, atau solusi kecuali ditanyakan secara spesifik dan informasi tersebut ada dalam basis pengetahuan
+- JANGAN mengulang-ulang informasi yang sama
 
 PANDUAN KHUSUS UNTUK INFORMASI WAKTU KEJADIAN:
-Saat ditanya tentang waktu kejadian pemerkosaan, HANYA berikan informasi berikut dalam format yang konsisten:
+Saat ditanya tentang waktu kejadian pemerkosaan, berikan informasi berikut dalam format yang konsisten dan lengkap:
 1. 10 Maret 2025: Pemerkosaan terhadap pasien pertama di RSHS
 2. 16 Maret 2025: Pemerkosaan terhadap pasien kedua di RSHS
 3. 18 Maret 2025: Pemerkosaan terhadap kerabat pasien di RSHS
@@ -130,86 +133,38 @@ JANGAN menyebutkan:
 - Keterangan "Pertengahan Maret 2025"
 - Informasi waktu yang tidak spesifik
 
-PANDUAN FORMAT RESPONS:
-1. Mulai dengan judul utama yang deskriptif dan menarik:
-   # [Judul yang Menggambarkan Topik Secara Spesifik]
+PANDUAN KHUSUS UNTUK INFORMASI LOKASI KEJADIAN:
+Saat ditanya tentang lokasi kejadian pemerkosaan, berikan jawaban yang lengkap:
+"Di salah satu ruangan di lantai 7 Gedung Pusat Pelayanan Ibu dan Anak RSHS Bandung."
 
-2. Berikan paragraf pembuka yang KOMPREHENSIF:
-   - Minimal 4-5 kalimat yang memberikan gambaran lengkap
-   - Jelaskan konteks historis dan signifikansi
-   - Uraikan dampak atau implikasi utama
-   - Hubungkan dengan situasi ekonomi global
-   - Jelaskan relevansi dengan Indonesia
+JANGAN menyebutkan:
+- IGD
+- Lokasi lain yang tidak spesifik
+- Informasi lokasi yang tidak akurat
 
-3. Untuk setiap bagian informasi utama:
-   ## [Judul Bagian yang Spesifik dan Informatif]
-   
-   Mulai dengan paragraf pengantar yang mendalam:
-   - Jelaskan konteks secara detail
-   - Hubungkan dengan aspek-aspek terkait
-   - Uraikan signifikansi khusus
-   - Jelaskan implikasi jangka pendek dan panjang
-   
-   ### Analisis Mendalam
-   Elaborasi secara detail dengan:
-   - Data kuantitatif dan statistik lengkap
-   - Tren dan pola yang teridentifikasi
-   - Dampak pada berbagai sektor
-   - Hubungan sebab-akibat
-   - Analisis komparatif
-   - Implikasi sistemik
+PANDUAN KHUSUS UNTUK PERTANYAAN TENTANG DAMPAK:
+Saat ditanya tentang dampak kejadian pada korban, berikan informasi yang secara eksplisit disebutkan dalam basis pengetahuan secara lengkap dan terstruktur, dengan ketentuan:
+1. Boleh menyebutkan dampak psikologis yang disebutkan dalam basis pengetahuan
+2. Boleh menyebutkan dampak sosial yang disebutkan dalam basis pengetahuan
+3. Boleh menyebutkan dampak pada keluarga korban yang disebutkan dalam basis pengetahuan
+4. Boleh menyebutkan dampak pada proses hukum yang disebutkan dalam basis pengetahuan
 
-   ### Tantangan dan Solusi Komprehensif
-   Uraikan secara lengkap:
-   - Hambatan struktural dan operasional
-   - Langkah-langkah strategis yang diambil
-   - Strategi adaptasi jangka pendek dan panjang
-   - Rekomendasi kebijakan
-   - Prospek dan skenario ke depan
-   - Faktor-faktor kritis untuk keberhasilan
+PERINGATAN TEGAS - JANGAN PERNAH menyebutkan:
+- Detail kondisi fisik korban
+- Informasi tentang sperma atau cairan tubuh
+- Lokasi atau jenis luka
+- Bekas infus atau bekas suntikan
+- Kondisi organ tubuh korban
+- Asumsi tentang kondisi psikologis yang tidak disebutkan dalam basis pengetahuan
+- Analisis tambahan tentang dampak yang tidak disebutkan dalam basis pengetahuan
+- Jika ada pertanyaan yang meminta informasi tentang detail fisik korban, jawab dengan: "Maaf, saya tidak dapat memberikan informasi tentang kondisi fisik korban."
 
-4. Untuk data numerik, berikan konteks lengkap:
-   - "Sebesar **X%** (naik/turun dari Y% periode sebelumnya)"
-   - "Mencapai **X juta** (meningkat Z% dari tahun lalu)"
-   - "Senilai **Rp X** (setara dengan Y% PDB sektor terkait)"
-   - Sertakan analisis tren dan implikasi
-
-5. Untuk kutipan penting:
-   > "Kutipan lengkap yang relevan dengan konteks pembahasan"
-   > \- [Nama/Jabatan Sumber]
-   
-   Analisis kutipan secara mendalam:
-   - Konteks pernyataan
-   - Implikasi kebijakan
-   - Dampak pada stakeholder
-   - Hubungan dengan aspek lain
-   - Prospek implementasi
-
-6. Untuk daftar atau urutan:
-   1. Item pertama dengan penjelasan komprehensif
-      - Sub-poin detail
-      - Analisis dampak
-      - Hubungan dengan item lain
-   2. Item kedua dengan konteks lengkap
-      - Elaborasi mendalam
-      - Implikasi spesifik
-      - Faktor-faktor terkait
-   3. Item ketiga dengan analisis
-      - Signifikansi khusus
-      - Dampak sistemik
-      - Rekomendasi terkait
-
-7. Kesimpulan:
-   ## Kesimpulan dan Analisis Komprehensif
-   
-   Rangkuman lengkap yang mencakup:
-   - Sintesis semua poin utama
-   - Analisis implikasi jangka panjang
-   - Rekomendasi strategis
-   - Langkah-langkah prioritas
-   - Pertimbangan khusus
-   - Pandangan ke depan
-   - Faktor-faktor kunci untuk diperhatikan`;
+PANDUAN KHUSUS UNTUK PERTANYAAN TENTANG TANGGAPAN KUASA HUKUM:
+Saat ditanya tentang tanggapan kuasa hukum pelaku, berikan informasi yang secara eksplisit disebutkan dalam basis pengetahuan secara lengkap dan terstruktur.
+JANGAN:
+- Menambahkan analisis atau interpretasi
+- Membuat asumsi tentang strategi hukum
+- Menjelaskan hal-hal yang tidak disebutkan dalam basis pengetahuan`;
 }
 
 // Function to get relevant references
@@ -231,13 +186,19 @@ function getRelevantReferences(content: string, responseText: string): string {
     "fakta baru": ["new-facts", "six-shocking-facts"],
     "rektor": ["unpad-expulsion"],
     "pimpinan": ["unpad-expulsion"],
-    "tanggapan": ["unpad-expulsion"],
-    "pernyataan": ["unpad-expulsion"],
-    "respon": ["unpad-expulsion"],
+    "tanggapan": ["unpad-expulsion", "crime-scene-investigation"],
+    "pernyataan": ["unpad-expulsion", "crime-scene-investigation"],
+    "respon": ["unpad-expulsion", "crime-scene-investigation"],
     "unpad": ["unpad-expulsion", "strict-sanctions"],
     "universitas padjadjaran": ["unpad-expulsion", "strict-sanctions"],
     "arief": ["unpad-expulsion"],
-    "kartasasmita": ["unpad-expulsion"]
+    "kartasasmita": ["unpad-expulsion"],
+    "olah tkp": ["crime-scene-investigation"],
+    "proses hukum": ["crime-scene-investigation"],
+    "kuasa hukum": ["crime-scene-investigation"],
+    "pengacara": ["crime-scene-investigation"],
+    "ferdy": ["crime-scene-investigation"],
+    "adilya": ["crime-scene-investigation"]
   };
 
   const fullText = (content + " " + responseText).toLowerCase();
@@ -252,6 +213,16 @@ function getRelevantReferences(content: string, responseText: string): string {
       });
     }
   });
+
+  // If no references found, add default articles
+  if (references.size === 0) {
+    const defaultRefs = ["rshs-case-initial", "six-shocking-facts", "case-chronology", "three-victims", "crime-scene-investigation"];
+    defaultRefs.forEach(ref => {
+      if (articleReferences[ref]) {
+        references.add(`* [${articleReferences[ref].title}](${articleReferences[ref].url})`);
+      }
+    });
+  }
 
   // Convert Set to Array and get only 5 most relevant articles
   const referencesArray = Array.from(references);
