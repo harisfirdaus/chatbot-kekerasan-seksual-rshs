@@ -12,7 +12,13 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error('GEMINI_API_KEY is not set');
+      return res.status(500).json({ error: 'API key is not configured' });
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
     const result = await model.generateContent(prompt);
