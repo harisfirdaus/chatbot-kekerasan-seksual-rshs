@@ -2,11 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "project/api/*.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["project/api/**"]
-      }
+      "src": "project/api/**/*.ts",
+      "use": "@vercel/node"
     },
     {
       "src": "project/package.json",
@@ -19,7 +16,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/project/api/$1"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
