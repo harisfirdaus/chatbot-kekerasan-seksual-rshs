@@ -6,10 +6,21 @@
   "installCommand": "cd project && npm install",
   "routes": [
     {
-      "src": "/assets/(.*)",
+      "src": "/assets/(.*)\\.js",
       "headers": {
         "content-type": "application/javascript"
       },
+      "continue": true
+    },
+    {
+      "src": "/assets/(.*)\\.css",
+      "headers": {
+        "content-type": "text/css"
+      },
+      "continue": true
+    },
+    {
+      "src": "/assets/(.*)\\.(png|jpg|jpeg|gif|svg|ico)",
       "continue": true
     },
     {
