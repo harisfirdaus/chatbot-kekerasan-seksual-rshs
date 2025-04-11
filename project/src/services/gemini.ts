@@ -237,22 +237,15 @@ export async function getChatResponse(messages: { role: string; content: string 
     }
 
     const currentMessage = messages[messages.length - 1].content;
-    const prompt = `${getSystemPrompt()}\n\nContext:\n${getCombinedContext()}\n\nUser: ${currentMessage}`;
-
-    const response = await fetch('/api/gemini', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to get response from Gemini API');
-    }
-
-    const data = await response.json();
-    const responseText = data.response;
+    const fullPrompt = `${getSystemPrompt()}\n\nContext:\n${getCombinedContext()}\n\nUser: ${currentMessage}`;
+    
+    // Initialize Gemini model
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    
+    // Generate content directly
+    const result = await model.generateContent(fullPrompt);
+    const response = await result.response;
+    const responseText = response.text();
 
     const references = getRelevantReferences(currentMessage, responseText);
     const cleanedResponse = responseText.replace(/---[\s\S]*$/, '').trim();
@@ -260,6 +253,7 @@ export async function getChatResponse(messages: { role: string; content: string 
     return `${cleanedResponse}\n\n---\n\n*Jawaban disusun berdasarkan artikel di Kompas.id*\n\n**Baca juga:**\n${references}`;
   } catch (error) {
     console.error('Error getting chat response:', error);
-    throw error;
+    // Return a user-friendly error message
+    return "Maaf, terjadi kesalahan saat menghubungi layanan AI. Silakan coba lagi nanti.";
   }
 }
