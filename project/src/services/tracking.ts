@@ -1,5 +1,3 @@
-import { supabase } from '../lib/supabase';
-
 export interface ArticleClick {
   article_title: string;
   article_url: string;
@@ -8,18 +6,25 @@ export interface ArticleClick {
 
 export async function trackArticleClick(articleTitle: string, articleUrl: string) {
   try {
-    const { error } = await supabase
-      .from('article_clicks')
-      .insert([
-        {
+    const response = await fetch('/api/supabase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        action: 'save_chat',
+        data: {
           article_title: articleTitle,
           article_url: articleUrl,
-        },
-      ]);
+        }
+      }),
+    });
 
-    if (error) {
-      console.error('Error tracking article click:', error);
+    if (!response.ok) {
+      throw new Error('Failed to track article click');
     }
+
+    return await response.json();
   } catch (error) {
     console.error('Error tracking article click:', error);
   }

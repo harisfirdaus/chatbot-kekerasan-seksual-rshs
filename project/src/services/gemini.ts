@@ -236,31 +236,23 @@ export async function getChatResponse(messages: { role: string; content: string 
       return "Maaf, basis pengetahuan belum diatur. Silakan tunggu hingga sistem selesai memuat.";
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-    
-    const history = messages.slice(0, -1).map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'model',
-      parts: msg.content,
-    }));
-    
     const currentMessage = messages[messages.length - 1].content;
+    const prompt = `${getSystemPrompt()}\n\nContext:\n${getCombinedContext()}\n\nUser: ${currentMessage}`;
 
-    const chat = model.startChat({
-      history: [
-        { role: 'model', parts: getSystemPrompt() },
-        ...history
-      ],
-      generationConfig: {
-        maxOutputTokens: 2048,
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
+    const response = await fetch('/api/gemini', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ prompt }),
     });
 
-    const result = await chat.sendMessage(currentMessage);
-    const response = await result.response;
-    const responseText = response.text();
+    if (!response.ok) {
+      throw new Error('Failed to get response from Gemini API');
+    }
+
+    const data = await response.json();
+    const responseText = data.response;
 
     const references = getRelevantReferences(currentMessage, responseText);
     const cleanedResponse = responseText.replace(/---[\s\S]*$/, '').trim();
