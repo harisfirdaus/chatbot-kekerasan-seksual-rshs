@@ -240,7 +240,7 @@ export async function getChatResponse(messages: { role: string; content: string 
     const fullPrompt = `${getSystemPrompt()}\n\nContext:\n${getCombinedContext()}\n\nUser: ${currentMessage}`;
     
     // Initialize Gemini model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     
     // Generate content directly
     const result = await model.generateContent(fullPrompt);
