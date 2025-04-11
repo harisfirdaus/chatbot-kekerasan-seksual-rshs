@@ -8,5 +8,10 @@
   "buildCommand": "cd project && npm install && npm run build",
   "outputDirectory": "project/dist",
   "framework": "vite",
-  "installCommand": "cd project && npm install"
+  "installCommand": "cd project && npm install",
+  "env": {
+    "VITE_GEMINI_API_KEY": "@vite_gemini_api_key",
+    "VITE_SUPABASE_URL": "@vite_supabase_url",
+    "VITE_SUPABASE_ANON_KEY": "@vite_supabase_anon_key"
+  }
 } 
