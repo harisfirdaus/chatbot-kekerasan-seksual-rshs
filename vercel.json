@@ -1,21 +1,18 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "project/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
-  "buildCommand": "cd project && npm install && npm run build",
-  "outputDirectory": "project/dist",
-  "framework": "vite",
-  "installCommand": "cd project && npm install",
-  "env": {
-    "VITE_GEMINI_API_KEY": "@vite_gemini_api_key",
-    "VITE_SUPABASE_URL": "@vite_supabase_url",
-    "VITE_SUPABASE_ANON_KEY": "@vite_supabase_anon_key"
-  },
-  "regions": ["sin1"],
-  "github": {
-    "silent": true
-  }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 } 
