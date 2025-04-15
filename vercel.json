@@ -24,7 +24,7 @@
     },
     {
       "src": "/.*",
-      "dest": "/project/dist/index.html"
+      "dest": "/index.html"
     }
   ]
 } 
