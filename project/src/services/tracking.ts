@@ -12,7 +12,7 @@ export async function trackArticleClick(articleTitle: string, articleUrl: string
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
-        action: 'save_chat',
+        action: 'save_article_click',
         data: {
           article_title: articleTitle,
           article_url: articleUrl,

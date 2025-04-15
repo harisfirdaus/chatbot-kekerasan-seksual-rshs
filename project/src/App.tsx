@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChatMessage, ThinkingMessage } from './components/ChatMessage';
 import { ChatInput } from './components/ChatInput';
-import { getChatResponse, addArticlesToContext, isContextLoaded } from './services/gemini';
+import { getChatResponse, addArticlesToContext, isContextLoaded, fetchArticleReferences, fetchSystemPrompt } from './services/gemini';
 import type { Message, ChatState } from './types/chat';
 import { Loader2, HelpCircle } from 'lucide-react';
 
@@ -223,8 +223,75 @@ Ferdy juga meminta seluruh pihak masyarakat maupun media massa agar tidak mempub
 
 "Kami meminta semua pihak menghargai asas praduga tak bersalah. Klien kami akan mengikuti proses hukum dalam kasus ini," kata Ferdy.`;
 
-// Example questions array
-const exampleQuestions = [
+// Fungsi untuk mengambil artikel dari Supabase edge function
+async function fetchArticles() {
+  try {
+    const response = await fetch('/api/supabase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: 'get_articles' }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch articles');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    return null;
+  }
+}
+
+// Fungsi untuk mengambil example questions dari Supabase edge function
+async function fetchExampleQuestions() {
+  try {
+    const response = await fetch('/api/supabase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: 'get_example_questions' }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch example questions');
+    }
+
+    const data = await response.json();
+    return data && data.length ? data.map((q: { question: string }) => q.question) : null;
+  } catch (error) {
+    console.error('Error fetching example questions:', error);
+    return null;
+  }
+}
+
+// Menambahkan fallback articles jika API gagal
+const fallbackArticles = [
+  article1,
+  article2,
+  article3,
+  article4,
+  article5,
+  article6,
+  article7,
+  article8,
+  article9,
+  article10,
+  article11,
+  article12,
+  article13,
+  article14,
+  article15,
+  article16,
+  article17,
+  article18
+];
+
+// Fallback example questions array
+const fallbackExampleQuestions = [
   "Bagaimana kronologi kasus kekerasan seksual di RSHS?",
   "Siapa pelaku dalam kasus kekerasan seksual di RSHS?",
   "Bagaimana modus operandi pelaku dalam kasus RSHS?",
@@ -237,8 +304,8 @@ const exampleQuestions = [
 ];
 
 // Function to get random questions
-function getRandomQuestions(count: number) {
-  const shuffled = [...exampleQuestions].sort(() => 0.5 - Math.random());
+function getRandomQuestions(questions: string[], count: number) {
+  const shuffled = [...questions].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
 
@@ -250,41 +317,51 @@ function App() {
     isContextReady: false
   });
   const [inputValue, setInputValue] = useState('');
-  const [randomQuestions] = useState(() => getRandomQuestions(3));
+  const [randomQuestions, setRandomQuestions] = useState<string[]>([]);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Add all provided articles to context
-    const articles = [
-      article1,
-      article2,
-      article3,
-      article4,
-      article5,
-      article6,
-      article7,
-      article8,
-      article9,
-      article10,
-      article11,
-      article12,
-      article13,
-      article14,
-      article15,
-      article16,
-      article17,
-      article18
-    ];
-
-    // Add each article to context and update state when done
-    Promise.all(articles.map(article => addArticlesToContext(article)))
-      .then(() => {
+    // Load all data from API
+    const loadAllData = async () => {
+      try {
+        // 1. Mengambil example questions
+        const questions = await fetchExampleQuestions();
+        const questionsToUse = questions || fallbackExampleQuestions;
+        setRandomQuestions(getRandomQuestions(questionsToUse, 3));
+        
+        // 2. Mengambil article references
+        await fetchArticleReferences();
+        
+        // 3. Mengambil system prompt
+        await fetchSystemPrompt();
+        
+        // 4. Mengambil articles
+        const articlesData = await fetchArticles();
+        const articlesToUse = articlesData && Array.isArray(articlesData) && articlesData.length > 0
+          ? articlesData.map((article: { content: string }) => article.content)
+          : fallbackArticles;
+        
+        // Add articles to context
+        await Promise.all(articlesToUse.map((article: string) => addArticlesToContext(article)));
+        
+        // Update state when all data is loaded
         setChatState(prev => ({
           ...prev,
           isContextReady: true
         }));
-      });
+        
+        console.log("All data loaded successfully");
+      } catch (error) {
+        console.error("Error loading data:", error);
+        setChatState(prev => ({
+          ...prev,
+          error: "Gagal memuat data. Beberapa fitur mungkin tidak berfungsi dengan baik."
+        }));
+      }
+    };
+    
+    loadAllData();
   }, []);
 
   useEffect(() => {
@@ -331,6 +408,7 @@ function App() {
 
   const handleExampleClick = (question: string) => {
     setInputValue(question);
+    handleSendMessage(question);
   };
 
   return (

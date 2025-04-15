@@ -14,77 +14,79 @@ type ArticleReferenceMap = {
   [key: string]: ArticleReference;
 }
 
-// Store article references
-const articleReferences: ArticleReferenceMap = {
-  "rshs-case-initial": {
-    title: "Mahasiswa PPDS Anestesi Unpad Perkosa Keluarga Pasien di RS Hasan Sadikin, Pelaku Ditahan",
-    url: "https://www.kompas.id/artikel/mahasiswa-ppds-anestesi-unpad-perkosa-keluarga-pasien-di-rs-hasan-sadikin-pelaku-ditahan"
-  },
-  "unpad-expulsion": {
-    title: "Unpad Pecat Mahasiswa PPDS Anestesi yang Perkosa Keluarga Pasien RS Hasan Sadikin",
-    url: "https://www.kompas.id/artikel/unpad-pecat-mahasiswa-ppds-anestesi-yang-perkosa-keluarga-pasien-rs-hasan-sadikin"
-  },
-  "lifetime-ban": {
-    title: "Dokter Residen Pelaku Kekerasan Seksual Seumur Hidup Dilarang Lanjutkan Pendidikan di RSHS Bandung",
-    url: "https://www.kompas.id/artikel/kekerasan-seksual-oleh-peserta-ppds-fk-unpadrshs-bandung-sanksi-pemberhentian-pendidikan-diberikan"
-  },
-  "case-chronology": {
-    title: "Kronologi Dokter Residen Unpad Memerkosa Korbannya di RSHS Bandung",
-    url: "https://www.kompas.id/artikel/kronologi-dokter-residen-unpad-memperkosa-korbannya-di-rshs-bandung"
-  },
-  "three-victims": {
-    title: "Korban Dugaan Pemerkosaan oleh Dokter Residen Unpad di RSHS Jadi Tiga Orang",
-    url: "https://www.kompas.id/artikel/korban-dugaan-pemerkosaan-oleh-mahasiswa-ppds-di-rshs-bertambah-jadi-tiga-orang"
-  },
-  "license-revocation": {
-    title: "Izin Praktik Dokter Residen Unpad Pelaku Kekerasan Seksual Akan Dicabut",
-    url: "https://www.kompas.id/artikel/tunggu-proses-hukum-izin-praktik-dokter-residen-pelaku-kekerasan-seksual-akan-dicabut"
-  },
-  "sexual-disorder": {
-    title: "Dokter Residen Unpad Pelaku Pemerkosaan di RSHS Diduga Miliki Kelainan Seksual",
-    url: "https://www.kompas.id/artikel/dokter-residen-unpad-pelaku-pemerkosaan-di-rshs-diduga-miliki-kelainan-seksual"
-  },
-  "new-facts": {
-    title: "Fakta Baru Apa yang Muncul di Kasus Pemerkosaan yang Dilakukan Dokter Residen Unpad di RSHS Bandung?",
-    url: "https://www.kompas.id/artikel/fakta-baru-apa-yang-muncul-dalam-kasus-pemerkosaan-yang-dilakukan-dokter-residen-di-rshs-bandung"
-  },
-  "dna-test": {
-    title: "Pemerkosaan di RSHS Bandung, Polisi Lakukan Tes DNA demi Ungkap Pelaku Baru",
-    url: "https://www.kompas.id/artikel/pemerkosaan-di-rshs-bandung-polisi-lakukan-tes-dna-demi-ungkap-pelaku-baru"
-  },
-  "midazolam-controversy": {
-    title: "Midazolam, Obat Bius dan Kontroversinya dari Dokter Residen di Bandung hingga Hukuman Mati di AS",
-    url: "https://www.kompas.id/artikel/midazolam-obat-bius-dan-kontoversinya-dari-bandung-hingga-amerika-serikat"
-  },
-  "psychological-evaluation": {
-    title: "Evaluasi Psikologis Berkala pada Peserta PPDS untuk Kembalikan Kepercayaan Masyarakat",
-    url: "https://www.kompas.id/artikel/evaluasi-psikologis-berkala-pada-peserta-ppds-untuk-kembalikan-kepercayaan-masyarakat"
-  },
-  "medical-ethics": {
-    title: "Etika Kedokteran dan Kasus Pemerkosaan oleh Mahasiswa PPDS",
-    url: "https://www.kompas.id/artikel/etika-kedokteran-dan-kasus-pemerkosaan-oleh-mahasiswa-ppds"
-  },
-  "strict-sanctions": {
-    title: "Sanksi Tegas bagi Mahasiswa PPDS Pelaku Kekerasan Seksual",
-    url: "https://www.kompas.id/artikel/sanksi-tegas-bagi-mahasiswa-ppds-pelaku-kekerasan-seksual"
-  },
-  "two-victims-chronology": {
-    title: "Terungkap Kronologi Dugaan Pemerkosaan Dua Pasien oleh Dokter Residen Unpad di RSHS",
-    url: "https://www.kompas.id/artikel/terungkap-kronologi-dugaan-pemerkosaan-dua-pasien-oleh-dokter-residen-unpad-di-rshs"
-  },
-  "family-response": {
-    title: "Keluarga Korban Pemerkosaan Bersuara, Manajemen RSHS Belum Minta Maaf",
-    url: "https://www.kompas.id/artikel/keluarga-korban-pemerkosaan-bersuara-manajemen-rshs-tidak-minta-maaf"
-  },
-  "six-shocking-facts": {
-    title: "Pemerkosaan di Rumah Sakit Hasan Sadikin Bandung, Enam Fakta Mengejutkan Terkuak",
-    url: "https://www.kompas.id/artikel/pemerkosaan-di-rumah-sakit-hasan-sadikin-bandung-enam-mengejutkan-terkuak"
-  },
-  "crime-scene-investigation": {
-    title: "Pemerkosaan di RSHS Bandung: Tim Gabungan Puslabfor Polri dan Polda Jabar Lakukan Olah TKP",
-    url: "https://www.kompas.id/artikel/pemerkosaan-di-rshs-bandung-tim-gabungan-puslabfor-polri-dan-polda-jabar-lakukan-olah-tkp"
+// Store article references - akan diupdate dari API
+let articleReferences: ArticleReferenceMap = {};
+
+// Store system prompt template - akan diupdate dari API
+let systemPromptTemplate = '';
+
+// Fungsi untuk mengambil article references dari Supabase
+export async function fetchArticleReferences(): Promise<boolean> {
+  try {
+    const response = await fetch('/api/supabase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: 'get_article_references' }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch article references');
+    }
+
+    const data = await response.json();
+    if (data && data.length) {
+      // Convert array of references to map
+      const refMap: ArticleReferenceMap = {};
+      data.forEach((ref: any) => {
+        refMap[ref.key] = {
+          title: ref.title,
+          url: ref.url
+        };
+      });
+      articleReferences = refMap;
+      return true;
+    }
+    
+    return false;
+  } catch (error) {
+    console.error('Error fetching article references:', error);
+    return false;
   }
-};
+}
+
+// Fungsi untuk mengambil system prompt dari Supabase
+export async function fetchSystemPrompt(): Promise<boolean> {
+  try {
+    const response = await fetch('/api/supabase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action: 'get_system_prompts' }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch system prompts');
+    }
+
+    const data = await response.json();
+    if (data && data.length) {
+      // Ambil prompt aktif (terbaru atau status active)
+      const activePrompt = data.find((p: any) => p.active) || data[0];
+      if (activePrompt && activePrompt.content) {
+        systemPromptTemplate = activePrompt.content;
+        return true;
+      }
+    }
+    
+    return false;
+  } catch (error) {
+    console.error('Error fetching system prompt:', error);
+    return false;
+  }
+}
 
 // Function to add articles to context
 export async function addArticlesToContext(article: string): Promise<void> {
@@ -102,14 +104,11 @@ function getCombinedContext(): string {
   return articlesContexts.join('\n\n---\n\n');
 }
 
-// Function to get system prompt
-function getSystemPrompt(): string {
-  const combinedContext = getCombinedContext();
-  
-  return `
+// Fallback system prompt jika fetch gagal
+const fallbackSystemPrompt = `
 Anda adalah asisten AI yang HANYA boleh menggunakan basis pengetahuan berikut untuk menjawab pertanyaan:
 
-${combinedContext}
+${getCombinedContext()}
 
 INSTRUKSI PENTING:
 - HANYA gunakan informasi yang secara eksplisit disebutkan dalam basis pengetahuan di atas
@@ -165,11 +164,37 @@ JANGAN:
 - Menambahkan analisis atau interpretasi
 - Membuat asumsi tentang strategi hukum
 - Menjelaskan hal-hal yang tidak disebutkan dalam basis pengetahuan`;
+
+// Function to get system prompt
+function getSystemPrompt(): string {
+  // Jika system prompt berhasil diambil dari API
+  if (systemPromptTemplate) {
+    // Ganti placeholder dengan context jika diperlukan
+    return systemPromptTemplate.replace('{{CONTEXT}}', getCombinedContext());
+  }
+  
+  // Fallback ke default system prompt
+  return fallbackSystemPrompt;
 }
+
+// Fallback article references jika fetch gagal
+const fallbackArticleReferences: ArticleReferenceMap = {
+  "rshs-case-initial": {
+    title: "Mahasiswa PPDS Anestesi Unpad Perkosa Keluarga Pasien di RS Hasan Sadikin, Pelaku Ditahan",
+    url: "https://www.kompas.id/artikel/mahasiswa-ppds-anestesi-unpad-perkosa-keluarga-pasien-di-rs-hasan-sadikin-pelaku-ditahan"
+  },
+  "unpad-expulsion": {
+    title: "Unpad Pecat Mahasiswa PPDS Anestesi yang Perkosa Keluarga Pasien RS Hasan Sadikin",
+    url: "https://www.kompas.id/artikel/unpad-pecat-mahasiswa-ppds-anestesi-yang-perkosa-keluarga-pasien-rs-hasan-sadikin"
+  },
+  // ... other fallback references can be kept but will only be used if API fetch fails
+};
 
 // Function to get relevant references
 function getRelevantReferences(content: string, responseText: string): string {
+  // Gunakan article references yang diambil dari API, atau fallback jika API gagal
   const references = new Set<string>();
+  const referencesToUse = Object.keys(articleReferences).length > 0 ? articleReferences : fallbackArticleReferences;
   
   const keywordMap: { [key: string]: string[] } = {
     "kronologi": ["case-chronology", "two-victims-chronology", "six-shocking-facts"],
@@ -207,8 +232,8 @@ function getRelevantReferences(content: string, responseText: string): string {
   Object.entries(keywordMap).forEach(([keyword, refs]) => {
     if (fullText.includes(keyword.toLowerCase())) {
       refs.forEach(ref => {
-        if (articleReferences[ref]) {
-          references.add(`* [${articleReferences[ref].title}](${articleReferences[ref].url})`);
+        if (referencesToUse[ref]) {
+          references.add(`* [${referencesToUse[ref].title}](${referencesToUse[ref].url})`);
         }
       });
     }
@@ -218,8 +243,8 @@ function getRelevantReferences(content: string, responseText: string): string {
   if (references.size === 0) {
     const defaultRefs = ["rshs-case-initial", "six-shocking-facts", "case-chronology", "three-victims", "crime-scene-investigation"];
     defaultRefs.forEach(ref => {
-      if (articleReferences[ref]) {
-        references.add(`* [${articleReferences[ref].title}](${articleReferences[ref].url})`);
+      if (referencesToUse[ref]) {
+        references.add(`* [${referencesToUse[ref].title}](${referencesToUse[ref].url})`);
       }
     });
   }
