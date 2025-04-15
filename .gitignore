@@ -1,1 +1,19 @@
 .vercel
+node_modules
+.env
+.env*
+
+# Supabase specific
+supabase/functions/**/.env
+supabase/.temp
+supabase/*.exe
+supabase.json
+
+# Deno specific
+deno.lock
+
+# Project specific node_modules
+project/node_modules
+
+# Build output
+project/dist
