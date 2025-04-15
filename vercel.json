@@ -20,8 +20,11 @@
       "dest": "/project/api/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/project/$1"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/project/dist/index.html"
     }
   ]
 } 
