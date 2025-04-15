@@ -381,6 +381,9 @@ function App() {
 
     const userMessage: Message = { role: 'user', content };
     
+    // Kosongkan input field
+    setInputValue('');
+    
     setChatState(prev => ({
       ...prev,
       messages: [...prev.messages, userMessage],
