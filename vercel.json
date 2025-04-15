@@ -3,12 +3,7 @@
   "builds": [
     {
       "src": "project/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "root": "project",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
-      }
+      "use": "@vercel/static-build"
     },
     {
       "src": "project/api/**/*.js",
