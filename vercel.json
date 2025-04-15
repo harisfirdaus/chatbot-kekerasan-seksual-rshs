@@ -6,14 +6,14 @@
       "use": "@vercel/static-build"
     },
     {
-      "src": "project/api/**/*.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/project/api/$1"
+      "dest": "/api/$1"
     },
     {
       "handle": "filesystem"
