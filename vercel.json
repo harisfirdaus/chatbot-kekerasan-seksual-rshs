@@ -5,8 +5,9 @@
       "src": "project/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist",
-        "root": "project"
+        "root": "project",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
       }
     },
     {
